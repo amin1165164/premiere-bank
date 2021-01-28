@@ -77,40 +77,49 @@
         // deposit button for deposit handler
         const depositBtn = document.getElementById('deposit-button');
         depositBtn.addEventListener("click", function(){
-            const depositAmount = document.getElementById('depositAmount').value;
-            const depositValue = parseFloat(depositAmount);
+            // const depositAmount = document.getElementById('depositAmount').value;
+            // const depositValue = parseFloat(depositAmount);
+            const depositValue = getInputNumber("depositAmount");
 
             updateSpanText("previousDeposit", depositValue);
             updateSpanText("currentBalance", depositValue);
             
-            document.getElementById('depositAmount').value = "";
-
-            function updateSpanText(id, depositValue){
-                const current = document.getElementById(id).innerText;
-                const currentValue = parseFloat(current);
-                const totalAmount = depositValue + currentValue;
-                document.getElementById(id).innerText = totalAmount;
-            }    
+            document.getElementById('depositAmount').value = "";    
         })
 
         // withdraw button for withdraw handler
         const withdrawBtn = document.getElementById('withdraw-button');
         withdrawBtn.addEventListener("click", function(){
-            const withdrawAmount = document.getElementById('withdrawAmount').value;
-            const withdrawValue = parseFloat(withdrawAmount);
-            console.log(withdrawValue);
+            const withdrawAmount = getInputNumber('withdrawAmount');
 
-            const previousWithdrawAmount = document.getElementById('previousWithdraw').innerText;
-            const previousWithdrawValue = parseFloat(previousWithdrawAmount);
-            console.log(previousWithdrawValue);
+            updateSpanText("previousWithdraw", withdrawAmount);
+            updateSpanText("currentBalance", -1 * withdrawAmount);
 
-            const totalWithdraw = withdrawValue + previousWithdrawValue;
-            console.log(totalWithdraw);
+            // const previousWithdrawAmount = document.getElementById('previousWithdraw').innerText;
+            // const previousWithdrawValue = parseFloat(previousWithdrawAmount);
+            // console.log(previousWithdrawValue);
 
-            document.getElementById('previousWithdraw').innerText = totalWithdraw;
+            // const totalWithdraw = withdrawValue + previousWithdrawValue;
+            // console.log(totalWithdraw);
 
-            document.getElementById('withdrawAmount').value = "";
+            // document.getElementById('previousWithdraw').innerText = totalWithdraw;
+
+             document.getElementById('withdrawAmount').value = "";
         })
+
+        function getInputNumber(id){
+            const amount = document.getElementById(id).value;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+        }
+
+        
+        function updateSpanText(id, depositValue){
+            const current = document.getElementById(id).innerText;
+            const currentValue = parseFloat(current);
+            const totalAmount = depositValue + currentValue;
+            document.getElementById(id).innerText = totalAmount;
+        }
         
     </script>
     
